@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolePermissionSeeder extends Seeder
 {
@@ -29,5 +31,33 @@ class RolePermissionSeeder extends Seeder
             ]);
         }
 
+        $customerRole = Role::firstOrCreate([
+            'name' => 'customer'
+        ]);
+
+        $customerPermissions = [
+            'checkout package',
+            'view orders'
+        ];
+
+        $customerRole->syncPermissions($customerPermissions);
+
+        $superAdminRole = Role::firstOrCreate([
+            'name' => 'super_admin'
+        ]);
+
+        $user = User::create([
+            'name' => 'Super Admin',
+            'email' => 'superadmin@travello.com',
+            'phonenumber' => '08111111111',
+            'avatar' => 'images/default-avatar.png',
+            'password' => bcrypt('qwerty123')
+        ]);
+
+        $superAdminPermissions = [
+
+        ];
+
+        $superAdminRole->syncPermissions($superAdminPermissions);
     }
 }
