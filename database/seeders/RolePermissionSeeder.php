@@ -49,15 +49,17 @@ class RolePermissionSeeder extends Seeder
         $user = User::create([
             'name' => 'Super Admin',
             'email' => 'superadmin@travello.com',
-            'phonenumber' => '08111111111',
+            'phone_number' => '62811111111',
             'avatar' => 'images/default-avatar.png',
             'password' => bcrypt('qwerty123')
         ]);
 
-        $superAdminPermissions = [
+        $user->assignRole($superAdminRole);
 
-        ];
+        // $superAdminPermissions = [
 
-        $superAdminRole->syncPermissions($superAdminPermissions);
+        // ];
+
+        // $superAdminRole->syncPermissions($superAdminPermissions);
     }
 }
