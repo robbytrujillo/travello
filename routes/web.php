@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::middleware('')
+        Route::middleware('can:manage categories')->group(function () {
+            Route::resource('categories', CategoryController::class);
+        });
     });
 });
 
