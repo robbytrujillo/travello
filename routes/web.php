@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PackageBankController;
@@ -20,6 +21,29 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::middleware('can:checkout package')->group(function () {
+        Route::get('/book/{packageTour:slug}', [FrontController::class, 'book'])
+            ->name('front.book');
+
+        Route::post('/book/save/{packageTour:slug}', [FrontController::class, 'book_store'])
+            ->name('front.book.store');
+
+        Route::get('/book/choose-bank/{packageBooking}/', [FrontController::class, 'choose_bank'])
+            ->name('front.choose_bank');
+
+        Route::pacth('/book/choose-bank/{packageBooking}/save', [FrontController::class, 'choose_bank_store'])
+            ->name('front.choose_bank_store');
+
+        Route::get('/book/payment/{packageBooking}', [FrontController::class, 'book_payment'])
+            ->name('front.book_payment');
+    
+        Route::patch('/book/payment/{packageBooking}/save', [FrontController::class, 'book_payment_store'])
+        ->name('front.book_payment_store');
+        
+        Route::get('/book-finish', [FrontController::class, 'book_finish'])
+        ->name('front.book_finish');
+            
+        });
     Route::prefix('admin')->name('admin.')->group(function () {
         
         Route::middleware('can:manage categories')->group(function () {
