@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PackageBankController;
 use App\Http\Controllers\PackageTourController;
 use App\Http\Controllers\PackageBookingController;
@@ -52,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
         Route::middleware('can:view orders')->group(function () {
+            
             Route::get('/my-bookings', [DashboardController::class, 'my-bookings'])
                 ->name('bookings');
             
