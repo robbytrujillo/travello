@@ -47,7 +47,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/book-finish', [FrontController::class, 'book_finish'])
         ->name('front.book_finish');
             
+    });
+
+    Route::prefix('dashboard')->name('dashboar')->group(function () {
+
+        Route::middleware('can:view orders')->group(function () {
+            Route::get('/my-bookings', [DashboardController::class, 'my-bookings'])
+                ->name('bookings');
+            
+            Route::get('/my-bookings/details/{packageBooking}', [DashboardController::class, 'booking_details'])
+                ->name('booking_details');
         });
+    });
+
     Route::prefix('admin')->name('admin.')->group(function () {
         
         Route::middleware('can:manage categories')->group(function () {
