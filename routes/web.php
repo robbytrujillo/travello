@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
             
     });
 
-    Route::prefix('dashboard')->name('dashboar')->group(function () {
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
         Route::middleware('can:view orders')->group(function () {
             Route::get('/my-bookings', [DashboardController::class, 'my-bookings'])
