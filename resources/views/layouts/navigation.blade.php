@@ -17,6 +17,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    @role('super_admin')
                     <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
                         {{ __('Categories') }}
                     </x-nav-link>
@@ -25,10 +26,14 @@
                         {{ __('Banks') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.package_tours.index')" :active="request()->routeIs('admin.package_tour.index')">
+                    <x-nav-link :href="route('admin.package_tours.index')" :active="request()->routeIs('admin.package_tours.index')">
                         {{ __('Package Tours') }}
                     </x-nav-link>
-
+                    
+                    <x-nav-link :href="route('admin.package_bookings.index')" :active="request()->routeIs('admin.package_booking.index')">
+                        {{ __('Package Bookings') }}
+                    </x-nav-link>
+                    @endrole
 
                 </div>
             </div>
