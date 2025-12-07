@@ -32,6 +32,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        // 1. Data akan divalidasi
+        // 2. jika lulus validasi, maka mulai proses penyimpanan
     }
 
     /**
