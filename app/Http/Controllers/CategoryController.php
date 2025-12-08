@@ -34,6 +34,7 @@ class CategoryController extends Controller
         //
         // 1. Data akan divalidasi
         // 2. jika lulus validasi, maka mulai proses penyimpanan
+        
     }
 
     /**
