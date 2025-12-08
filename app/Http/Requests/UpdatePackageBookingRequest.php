@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePackageBankRequest extends FormRequest
+class UpdatePackageBookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,7 @@ class UpdatePackageBankRequest extends FormRequest
     {
         return [
             //
-            'bank_name' => ['required', 'string', 'max:255'],
-            'bank_account_name' => ['required', 'string', 'max:255'],
-            'bank_account_number' => ['required', 'string', 'max:255'],
-            'logo' => ['sometimes', 'image', 'mimes:png,jpg,jpeg,svg'],
+            'package_bank_id' => ['required', 'integer'],
         ];
     }
 }
