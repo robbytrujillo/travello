@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Cache\Store;
 use App\Http\Requests\StoreCategoryRequest;
 
@@ -36,7 +37,14 @@ class CategoryController extends Controller
         //
         // 1. Data akan divalidasi
         // 2. jika lulus validasi, maka mulai proses penyimpanan
-        
+        DB::transaction( function() use ($request) {
+            $validated = $request->validated();
+
+            if ($request->hasFile('icon')) {
+                $iconPath = $request->file('icon')->store('icons', 'public');
+                $validated['icon'] = $iconPath;
+            }
+        });
     }
 
     /**
