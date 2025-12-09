@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Cache\Store;
@@ -44,6 +45,8 @@ class CategoryController extends Controller
                 $iconPath = $request->file('icon')->store('icons', 'public');
                 $validated['icon'] = $iconPath;
             }
+
+            $validated['slug'] = Str::slug($validated['name']); // Str adalah helper yang untuk slug dihubungkan dengan data name
         });
     }
 
