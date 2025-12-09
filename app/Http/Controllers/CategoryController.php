@@ -47,7 +47,11 @@ class CategoryController extends Controller
             }
 
             $validated['slug'] = Str::slug($validated['name']); // Str adalah helper yang untuk slug dihubungkan dengan data name
+
+            $newCategory = Category::create($validated);
         });
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**
