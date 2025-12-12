@@ -41,7 +41,7 @@
                     </div>
                 @empty
                     <p>
-                        Bank data is not yet available
+                        There is no latest bank data yet
                     </p>
                 @endforelse
 

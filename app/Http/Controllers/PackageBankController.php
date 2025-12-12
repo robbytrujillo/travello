@@ -86,7 +86,7 @@ class PackageBankController extends Controller
             $packageBank->update($validated);
         });
 
-        return redirect()->route('admin.banks.index');
+        return redirect()->route('admin.package_banks.index');
     }
 
     /**
@@ -99,6 +99,6 @@ class PackageBankController extends Controller
             $packageBank->delete();
         });
 
-        return redirect()->route('admin.banks.index');
+        return redirect()->route('admin.package_banks.index');
     }
 }
