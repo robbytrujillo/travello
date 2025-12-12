@@ -36,6 +36,8 @@ class PackageBankController extends Controller
     public function store(StorePackageBankRequest $request)
     {
         //
+        // 1. Data akan divalidasi
+        // 2. jika lulus validasi, maka mulai proses penyimpanan
         DB::transaction( function() use ($request) {
             $validated = $request->validated();
 
