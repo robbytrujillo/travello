@@ -19,20 +19,20 @@
                         <div class="flex flex-row items-center gap-x-3">
                             <img src="#" alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
                             <div class="flex flex-col">
-                                <h3 class="text-xl font-bold text-indigo-950">tour name</h3>
-                            <p class="text-sm text-slate-500">tour category</p>
+                                <h3 class="text-xl font-bold text-indigo-950">{{ $tour->name }}</h3>
+                            <p class="text-sm text-slate-500">{{ $tour->category->name }}</p>
                             </div>
                         </div> 
                         <div  class="flex-col hidden md:flex">
                             <p class="text-sm text-slate-500">Price</p>
-                            <h3 class="text-xl font-bold text-indigo-950">Rp 0</h3>
+                            <h3 class="text-xl font-bold text-indigo-950">Rp {{ number_format($tour->price, 0, ',', '.' ) }}</h3>
                         </div>
                         <div  class="flex-col hidden md:flex">
                             <p class="text-sm text-slate-500">Total Days</p>
-                            <h3 class="text-xl font-bold text-indigo-950">11 Days</h3>
+                            <h3 class="text-xl font-bold text-indigo-950">{{ $tour->days }} Days</h3>
                         </div>
                         <div class="flex-row items-center hidden md:flex gap-x-3">
-                            <a href="#" class="px-6 py-4 font-bold text-white bg-indigo-700 rounded-full">
+                            <a href="{{ route('admin.package_tours.show', $tour) }}" class="px-6 py-4 font-bold text-white bg-indigo-700 rounded-full">
                                 Manage
                             </a>
                         </div>
