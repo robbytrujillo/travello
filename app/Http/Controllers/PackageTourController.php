@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\PackageTour;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StorePackageTourRequest;
 
 class PackageTourController extends Controller
 {
@@ -31,9 +34,32 @@ class PackageTourController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePackageTourRequest $request)
     {
-        //
+        // Menggunkan Clousure Base Transcation
+        DB::transaction(function () use ($request) {
+            $validated = $request->validated();
+
+             if ($request->hasFile('thumbnail')) {
+                $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+                $validated['thumbnail'] = $thumbnailPath;
+            }
+
+            $validated['slug'] = Str::slug($validated['name']); // Str adalah helper yang untuk slug dihubungkan dengan data name
+            
+            $packageTour = PackageTour::create($validated);
+
+            if ($request->hasFile('photos')) {
+                foreach ($request->file('photos') as $photo) {
+                    $photoPath = $request->file('photo')->store('package_photos', 'public');
+                    $packageTour->package_photos()->create([
+                        'photo' => $photoPath
+                    ]);
+                };
+            }
+        });
+
+        return redirect()->route('admin.package_tours.index');
     }
 
     /**
