@@ -63,7 +63,7 @@
 
                     <hr class="my-5">
                     
-                    @for($i = 0;$i < 3;$i++)
+                    @for($i = 0; $i < 3; $i++)
                         <div class="mt-4">
                             <x-input-label for="photo" :value="__('photo')" />
                             <x-text-input id="photo" class="block w-full mt-1" type="file" name="photos[]" required autofocus autocomplete="photo" />
