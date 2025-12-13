@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\PackageTour;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,8 @@ class PackageTourController extends Controller
     public function index()
     {
         //
+        $package_tours = PackageTour::orderByDesc('id')->paginate(10);
+        return view('admin.package_tours.index', compact('package_tours'));
     }
 
     /**
@@ -21,6 +24,8 @@ class PackageTourController extends Controller
     public function create()
     {
         //
+        $categories = Category::orderByDesc('id');
+        return view('admin.package_tours.create', compact('categories'));
     }
 
     /**
