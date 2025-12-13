@@ -63,12 +63,14 @@
 
                     <hr class="my-5">
                     
+                    @for($i = 0;$i < 3;$i++)
                         <div class="mt-4">
                             <x-input-label for="photo" :value="__('photo')" />
                             <x-text-input id="photo" class="block w-full mt-1" type="file" name="photos[]" required autofocus autocomplete="photo" />
                             <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                         </div>
-
+                    @endfor
+                    
                     <div class="flex items-center justify-end mt-4">
             
                         <button type="submit" class="px-6 py-4 font-bold text-white bg-indigo-700 rounded-full">

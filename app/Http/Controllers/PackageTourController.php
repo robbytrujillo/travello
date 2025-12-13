@@ -27,7 +27,7 @@ class PackageTourController extends Controller
     public function create()
     {
         //
-        $categories = Category::orderByDesc('id');
+        $categories = Category::orderByDesc('id')->get();
         return view('admin.package_tours.create', compact('categories'));
     }
 
