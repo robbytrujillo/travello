@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePackageTourRequest;
+use App\Http\Requests\UpdatePackageTourRequest;
 
 class PackageTourController extends Controller
 {
@@ -79,14 +80,42 @@ class PackageTourController extends Controller
     public function edit(PackageTour $packageTour)
     {
         //
+        $categories = Category::orderByDesc('id')->get();
+        
+        $latestPhotos = $packageTour->package_photos()->orderByDesc('id')->take(3)->get();
+        return view('admin.package_tours.edit', compact('packageTour', 'latestPhotos', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PackageTour $packageTour)
+    public function update(UpdatePackageTourRequest $request, PackageTour $packageTour)
     {
         //
+        DB::transaction(function () use ($request, $packageTour) {
+            $validated = $request->validated();
+
+             if ($request->hasFile('thumbnail')) {
+                $thumbnailPath = $request->file('thumbnail')
+                    ->store('thumbnails/' . date('Y/m/d'), 'public');
+                $validated['thumbnail'] = $thumbnailPath;
+            }
+
+            $validated['slug'] = Str::slug($validated['name']); // Str adalah helper yang untuk slug dihubungkan dengan data name
+            
+            $packageTour->update($validated);
+
+            if ($request->hasFile('photos')) {
+                foreach ($request->file('photos') as $photo) {
+                    $photoPath = $photo->store('package_photos/' . date('Y/m/d'), 'public');
+                    $packageTour->package_photos()->create([
+                        'photo' => $photoPath
+                    ]);
+                };
+            }
+        });
+
+        return redirect()->route('admin.package_tours.index');
     }
 
     /**
@@ -95,5 +124,10 @@ class PackageTourController extends Controller
     public function destroy(PackageTour $packageTour)
     {
         //
+        DB::transaction(function () use ($packageTour) {
+            $packageTour->delete();
+        });
+
+        return redirect()->route('admin.package_tours.index');
     }
 }
