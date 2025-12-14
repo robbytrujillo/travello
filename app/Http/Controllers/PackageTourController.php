@@ -52,8 +52,7 @@ class PackageTourController extends Controller
 
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
-                    $photoPath = $photo->file('photo')
-                        ->store('package_photos/' . date('Y/m/d'), 'public');
+                    $photoPath = $photo->store('package_photos/' . date('Y/m/d'), 'public');
                     $packageTour->package_photos()->create([
                         'photo' => $photoPath
                     ]);

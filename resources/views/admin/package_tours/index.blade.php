@@ -17,7 +17,7 @@
                 @forelse($package_tours as $tour)
                     <div class="flex flex-row items-center justify-between item-card">
                         <div class="flex flex-row items-center gap-x-3">
-                            <img src="#" alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
+                            <img src="{{ Storage::url($tour->thumbnail) }}" alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
                             <div class="flex flex-col">
                                 <h3 class="text-xl font-bold text-indigo-950">{{ $tour->name }}</h3>
                             <p class="text-sm text-slate-500">{{ $tour->category->name }}</p>
