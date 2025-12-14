@@ -49,7 +49,7 @@ class PackageBankController extends Controller
             $newBank = PackageBank::create($validated);
         });
 
-        return redirect()->route('admin.banks.index');
+        return redirect()->route('admin.package_banks.index');
     }
 
     /**
