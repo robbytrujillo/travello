@@ -69,6 +69,8 @@ class PackageTourController extends Controller
     public function show(PackageTour $packageTour)
     {
         //
+        $latestPhotos = $packageTour->package_photos()->orderByDesc('id')->take(3)->get();
+        return view('admin.package_tours.show', compact('packageTour', 'latestPhotos'));
     }
 
     /**
