@@ -9,7 +9,7 @@ class FrontController extends Controller
 {
     //
     public function index() {
-        $package_tours = PackageTour::orderByDesc('id')->take(3)->get();
+        $package_tours = PackageTour::orderByDesc('id')->take(5)->get();
         return view('front.index', compact('package_tours'));
     }
 }
