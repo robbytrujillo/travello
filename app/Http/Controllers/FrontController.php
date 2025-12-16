@@ -16,6 +16,7 @@ class FrontController extends Controller
     }
 
     public function details(PackageTour $packageTour) {
-        return view('front.details', compact('packageTour'));
+        $latestPhotos = $packageTour->package_photos()->orderByDesc('id')->take(3)->get();
+        return view('front.details', compact('packageTour', 'latestPhotos'));
     }
 }

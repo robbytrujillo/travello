@@ -6,46 +6,45 @@
   <link href="{{ asset('output.css') }}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
-<body class="font-poppins text-black">
+<body class="text-black font-poppins">
     <section id="content" class="max-w-[640px] w-full mx-auto bg-[#F9F2EF] min-h-screen flex flex-col gap-8 pb-[120px]">
-        <nav class="mt-8 px-4 w-full flex items-center justify-between">
-          <a href="home.html">
+        <nav class="flex items-center justify-between w-full px-4 mt-8">
+          <a href="{{ route('front.index') }}">
             <img src="{{asset('assets/icons/back.png')}}" alt="back">
           </a>
-          <p class="text-center m-auto font-semibold">Details</p>
+          <p class="m-auto font-semibold text-center">Details</p>
           <a href="">
             <img src="{{asset('assets/icons/more-dots.svg')}}" alt="more">
           </a>
         </nav>
-        <div id="image-details" class="px-4 flex flex-col gap-3">
+        <div id="image-details" class="flex flex-col gap-3 px-4">
           <div class="w-full h-[345px] flex shrink-0 rounded-xl overflow-hidden">
-            <img id="image-thumbnail" src="{{asset('assets/thumbnails/nusa-penida.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
+            <img id="image-thumbnail" src="{{Storage::url($packageTour->thumbnail)}}" class="object-cover object-center w-full h-full" alt="thumbnail">
           </div>
-          <div class="grid grid-cols-4 gap-4 w-fit mx-auto">
-            <a href="{{asset('assets/thumbnails/nusa-penida.jpg')}}" class="thumbnail-option w-[74px] h-[74px] flex shrink-0 rounded-xl border-2 overflow-hidden mx-auto border-blue">
-              <img src="{{asset('assets/thumbnails/nusa-penida.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
+          <div class="grid grid-cols-4 gap-4 mx-auto w-fit">
+            <a href="{{Storage::url($packageTour->thumbnail)}}" class="thumbnail-option w-[74px] h-[74px] flex shrink-0 rounded-xl border-2 overflow-hidden mx-auto border-blue">
+              <img src="{{Storage::url($packageTour->thumbnail)}}" class="object-cover object-center w-full h-full" alt="thumbnail">
             </a>
-            <a href="{{asset('assets/thumbnails/nusa-penida2.jpg')}}" class="thumbnail-option w-[74px] h-[74px] flex shrink-0 rounded-xl border-2 overflow-hidden mx-auto opacity-50">
-              <img src="{{asset('assets/thumbnails/nusa-penida2.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
-            </a>
-            <a href="{{asset('assets/thumbnails/nusa-penida3.jpg')}}" class="thumbnail-option w-[74px] h-[74px] flex shrink-0 rounded-xl border-2 overflow-hidden mx-auto opacity-50">
-              <img src="{{asset('assets/thumbnails/nusa-penida3.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
-            </a>
-            <a href="{{asset('assets/thumbnails/nusa-penida4.jpg')}}" class="thumbnail-option w-[74px] h-[74px] flex shrink-0 rounded-xl border-2 overflow-hidden mx-auto opacity-50">
-              <img src="{{asset('assets/thumbnails/nusa-penida4.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
-            </a>
+
+            @foreach ($latestPhotos as $photo)
+              <a href="{{Storage::url($photo->photo)}}" class="thumbnail-option w-[74px] h-[74px] flex shrink-0 rounded-xl border-2 overflow-hidden mx-auto opacity-50">
+                <img src="{{Storage::url($photo->photo)}}" class="object-cover object-center w-full h-full" alt="thumbnail">
+              </a>
+            @endforeach
+           
+            
           </div>
         </div>
         <div class="mx-4 flex flex-col gap-3 bg-white p-[16px_24px] rounded-[22px]">
           <h1 class="font-semibold">{{ $packageTour->name }}</h1>
           <div class="flex justify-between gap-2">
             <div class="flex items-center gap-2">
-              <div class="w-6 h-6 flex items-center shrink-0">
-                <img src="{{asset('assets/icons/location-map.svg')}}" class="w-full h-full object-contain" alt="icon">
+              <div class="flex items-center w-6 h-6 shrink-0">
+                <img src="{{asset('assets/icons/location-map.svg')}}" class="object-contain w-full h-full" alt="icon">
               </div>
               <div class="flex flex-col gap-1">
                 <p class="text-sm leading-[22px] tracking-[0.35px] text-darkGrey">Location</p>
-                <p class="font-semibold text-sm tracking-035">{{ $packageTour->location }}</p>
+                <p class="text-sm font-semibold tracking-035">{{ $packageTour->location }}</p>
               </div>
             </div>
             <div class="flex flex-col gap-1">
@@ -66,11 +65,11 @@
         <div class="mx-4 flex flex-col gap-3 bg-white p-[16px_24px] rounded-[22px]">
           <h2 class="font-semibold">About Destination</h2>
           <p id="readMore" class="text-sm leading-[22px] tracking-035 text-darkGrey">
-            Picturesque destination renowned for its stunning coastal views and pristine white sand... 
+            {{ substr($packageTour->about, 0, 100) }}... 
             <button class="font-semibold text-blue" onclick="document.getElementById('readMore').classList.toggle('hidden'); document.getElementById('seeLess').classList.toggle('hidden');">Read More</button>
           </p>
           <p id="seeLess" class="hidden text-sm leading-[22px] tracking-035 text-darkGrey">
-            Picturesque destination renowned for its stunning coastal views and pristine white sand Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt est aspernatur ex consequatur similique illo at eum repellendus ea ullam. 
+            {{ $packageTour->about }} 
             <button class="font-semibold text-blue" onclick="document.getElementById('readMore').classList.toggle('hidden'); document.getElementById('seeLess').classList.toggle('hidden');">See Less</button>
           </p>
         </div>
@@ -80,14 +79,14 @@
             <div class="flex items-center justify-between gap-2">
               <div class="flex items-center gap-1">
                 <div class="w-12 h-12 border-4 border-white rounded-full overflow-hidden flex shrink-0 shadow-[6px_8px_20px_0_#00000008]">
-                  <img src="{{asset('assets/photos/pfp2.png')}}" class="w-full h-full object-cover object-center" alt="photo">
+                  <img src="{{asset('assets/photos/pfp2.png')}}" class="object-cover object-center w-full h-full" alt="photo">
                 </div>
                 <div class="flex flex-col gap-1">
                   <p class="font-bold text-sm leading-[22px] tracking-035">James Sullivan</p>
                   <p class="text-darkGrey text-xs leading-[20px] tracking-035">1 week ago</p>
                 </div>
               </div>
-              <div class="flex gap-1 items-center">
+              <div class="flex items-center gap-1">
                 <img src="{{asset('assets/icons/Star.svg')}}" alt="icon">
                 <img src="{{asset('assets/icons/Star.svg')}}" alt="icon">
                 <img src="{{asset('assets/icons/Star.svg')}}" alt="icon">
@@ -103,27 +102,27 @@
               <p class="font-semibold">2.547 <span class="font-normal text-sm leading-[22px] tracking-035 text-darkGrey">Reviews</span></p>
               <div class="flex items-center">
                 <div class="w-12 h-12 border-4 border-white rounded-full overflow-hidden flex shrink-0 shadow-[6px_8px_20px_0_#00000008] -ml-2 first-of-type:-ml-1">
-                  <img src="{{asset('assets/photos/pfp2.png')}}" class="w-full h-full object-cover object-center" alt="photo">
+                  <img src="{{asset('assets/photos/pfp2.png')}}" class="object-cover object-center w-full h-full" alt="photo">
                 </div>
                 <div class="w-12 h-12 border-4 border-white rounded-full overflow-hidden flex shrink-0 shadow-[6px_8px_20px_0_#00000008] -ml-2 first-of-type:-ml-1">
-                  <img src="{{asset('assets/photos/pfp3.png')}}" class="w-full h-full object-cover object-center" alt="photo">
+                  <img src="{{asset('assets/photos/pfp3.png')}}" class="object-cover object-center w-full h-full" alt="photo">
                 </div>
                 <div class="w-12 h-12 border-4 border-white rounded-full overflow-hidden flex shrink-0 shadow-[6px_8px_20px_0_#00000008] -ml-2 first-of-type:-ml-1">
-                  <img src="{{asset('assets/photos/pfp4.png')}}" class="w-full h-full object-cover object-center" alt="photo">
+                  <img src="{{asset('assets/photos/pfp4.png')}}" class="object-cover object-center w-full h-full" alt="photo">
                 </div>
               </div>
             </div>
             <div class="flex flex-col gap-3">
               <p class="font-semibold">Photo & Video</p>
               <div class="flex gap-1">
-                <div class="w-12 h-12 flex shrink-0 rounded-lg overflow-hidden relative">
-                  <img src="{{asset('assets/thumbnails/nusa-penida.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
+                <div class="relative flex w-12 h-12 overflow-hidden rounded-lg shrink-0">
+                  <img src="{{asset('assets/thumbnails/nusa-penida.jpg')}}" class="object-cover object-center w-full h-full" alt="thumbnail">
                 </div>
-                <div class="w-12 h-12 flex shrink-0 rounded-lg overflow-hidden relative">
-                  <img src="{{asset('assets/thumbnails/raja.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
+                <div class="relative flex w-12 h-12 overflow-hidden rounded-lg shrink-0">
+                  <img src="{{asset('assets/thumbnails/raja.jpg')}}" class="object-cover object-center w-full h-full" alt="thumbnail">
                 </div>
-                <div class="w-12 h-12 flex shrink-0 rounded-lg overflow-hidden relative">
-                  <img src="{{asset('assets/thumbnails/santorini.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
+                <div class="relative flex w-12 h-12 overflow-hidden rounded-lg shrink-0">
+                  <img src="{{asset('assets/thumbnails/santorini.jpg')}}" class="object-cover object-center w-full h-full" alt="thumbnail">
                   <div class="w-12 h-12 flex items-center justify-center bg-[#1c273080] absolute">
                     <span class="font-semibold text-white">101+</span>
                   </div>
