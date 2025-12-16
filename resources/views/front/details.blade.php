@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="mx-4 flex flex-col gap-3 bg-white p-[16px_24px] rounded-[22px]">
-          <h1 class="font-semibold">Nusa Penida Kelingking Beach</h1>
+          <h1 class="font-semibold">{{ $packageTour->name }}</h1>
           <div class="flex justify-between gap-2">
             <div class="flex items-center gap-2">
               <div class="w-6 h-6 flex items-center shrink-0">
@@ -45,7 +45,7 @@
               </div>
               <div class="flex flex-col gap-1">
                 <p class="text-sm leading-[22px] tracking-[0.35px] text-darkGrey">Location</p>
-                <p class="font-semibold text-sm tracking-035">Bali, Indonesia</p>
+                <p class="font-semibold text-sm tracking-035">{{ $packageTour->location }}</p>
               </div>
             </div>
             <div class="flex flex-col gap-1">
