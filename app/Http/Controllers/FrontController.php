@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\PackageTour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePackageTourRequest;
 
 class FrontController extends Controller
 {
@@ -22,5 +24,10 @@ class FrontController extends Controller
 
     public function book(PackageTour $packageTour) {
         return view('front.book', compact('packageTour'));
+    }
+
+    public function book_store(StorePackageTourRequest $request, PackageTour $packageTour) {
+        $user = Auth::user();
+        return view();
     }
 }
