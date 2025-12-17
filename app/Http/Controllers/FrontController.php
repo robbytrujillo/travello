@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\PackageBank;
 use App\Models\PackageTour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePackageTourRequest;
 
@@ -28,6 +30,13 @@ class FrontController extends Controller
 
     public function book_store(StorePackageTourRequest $request, PackageTour $packageTour) {
         $user = Auth::user();
-        return view();
+        $bank = PackageBank::orderByDesc('id')->first();
+        $packageBookingId = null;
+
+        DB::transaction(function () use ($request, $user, $packageTour, $bank, &$packageBookingId){
+            $validated = $request->validated();
+
+            $startDate = new Carbon($validated['start_date']);
+        });
     }
 }
