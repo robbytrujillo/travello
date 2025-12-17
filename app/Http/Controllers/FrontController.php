@@ -59,8 +59,14 @@ class FrontController extends Controller
             $validated['total_amount'] = $sub_total + $tax + $insurance;
 
             $packageBooking = PackageBooking::create('validated');
-            $packageBookingId = $packageBooking->id;
 
+            $packageBookingId = $packageBooking->id;
         });
+
+        if ($packageBookingId) {
+            return redirect()->route('front.choose_bank', $packageBookingId);
+        } else {
+            return back()->withErrors('Failed to create booking.');
+        }
     }
 }
