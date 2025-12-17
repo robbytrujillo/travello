@@ -107,9 +107,9 @@
         </div>
         <div id="discover" class="px-4">
           <div class="w-full h-[130px] flex flex-col gap-[10px] rounded-[22px] items-center overflow-hidden relative">
-            <img src="assets/backgrounds/Banner.png" class="object-cover object-center w-full h-full" alt="background">
+            <img src="{{ asset('assets/backgrounds/wonderful-indonesia3.png') }}" class="object-cover object-center w-full h-full" alt="background">
             <div class="absolute z-10 flex flex-col gap-[10px] transform -translate-y-1/2 top-1/2 left-4">
-              <p class="font-semibold text-white">Discover the<br>Beauty of Japan</p>
+              <p class="font-semibold text-black">Discover the<br>Beauty of Indonesia</p>
               <a href="" class="bg-[#4D73FF] p-[8px_24px] rounded-[10px] text-white font-semibold text-xs w-fit">Discover</a>
             </div>
           </div>
