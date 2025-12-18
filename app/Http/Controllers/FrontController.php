@@ -6,11 +6,12 @@ use App\Models\Category;
 use App\Models\PackageBank;
 use App\Models\PackageTour;
 use Illuminate\Http\Request;
+use App\Models\PackageBooking;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StorePackageTourRequest;
-use App\Models\PackageBooking;
+// use App\Http\Requests\StorePackageTourRequest;
+use App\Http\Requests\StorePackageBookingRequest;
 
 class FrontController extends Controller
 {
@@ -30,7 +31,7 @@ class FrontController extends Controller
         return view('front.book', compact('packageTour'));
     }
 
-    public function book_store(StorePackageTourRequest $request, PackageTour $packageTour) {
+    public function book_store(StorePackageBookingRequest $request, PackageTour $packageTour) {
         $user = Auth::user();
         $bank = PackageBank::orderByDesc('id')->first();
         $packageBookingId = null;
@@ -58,7 +59,7 @@ class FrontController extends Controller
             $validated['sub_total'] = $sub_total;
             $validated['total_amount'] = $sub_total + $tax + $insurance;
 
-            $packageBooking = PackageBooking::create('validated');
+            $packageBooking = PackageBooking::create($validated);
 
             $packageBookingId = $packageBooking->id;
         });
@@ -68,5 +69,11 @@ class FrontController extends Controller
         } else {
             return back()->withErrors('Failed to create booking.');
         }
+    }
+
+    public function choose_bank(PackageBooking $packageBooking) {
+        $user = Auth::user();
+
+        
     }
 }
