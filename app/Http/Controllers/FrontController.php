@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 // use App\Http\Requests\StorePackageTourRequest;
 use App\Http\Requests\StorePackageBookingRequest;
+use App\Http\Requests\UpdatePackageBookingRequest;
 
 class FrontController extends Controller
 {
@@ -80,5 +81,21 @@ class FrontController extends Controller
 
         $banks = PackageBank::all();
         return view('front.choose_bank', compact('packageBooking', 'banks'));
+    }
+
+    public function choose_bank_store(UpdatePackageBookingRequest $request, PackageBooking $packageBooking) {
+        $user = Auth::user();
+
+        if ($packageBooking->user_id != $user->id) {
+            abort(403);
+        }
+
+        DB::transaction(function () use ($request, $packageBooking) {
+            $validated = $request->validated();
+            $packageBooking->update([
+                'package_bank_id' => $validated['package_bank_id'],
+            ]);
+        });
+        return redirect()->route('front.book_payment', $packageBooking->id);
     }
 }
