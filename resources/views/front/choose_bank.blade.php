@@ -10,14 +10,14 @@
     <section id="content" class="max-w-[640px] w-full mx-auto bg-[#F9F2EF] min-h-screen flex flex-col gap-8 pb-8">
       <nav class="flex items-center justify-between w-full px-4 mt-8">
         <a href="booking.html">
-          <img src="assets/icons/back.png" alt="back">
+          <img src="{{asset('assets/icons/back.png')}}" alt="back">
         </a>
         <p class="m-auto font-semibold text-center">Checkout</p>
         <div class="w-12"></div>
       </nav>
       <div class="flex flex-col justify-center flex-1 h-full gap-8 px-4">
         <div class="px-[35px] w-full flex shrink-0">
-          <img src="assets/backgrounds/Bank-Account-Illustration.png" class="object-contain" alt="background">
+          <img src="{{asset('assets/backgrounds/Bank-Account-Illustration.png')}}" class="object-contain" alt="background">
         </div>
         <form action="payment.html" class="flex flex-col gap-8">
           <div class="flex flex-col gap-3">
@@ -26,7 +26,7 @@
               <label for="bca" class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                   <div class="w-[35px] h-[25px] flex shrink-0 overflow-hidden">
-                    <img src="assets/logos/BCA.svg" class="object-contain object-center w-full h-full" alt="logo">
+                    <img src="{{asset('assets/logos/BCA.svg')}}" class="object-contain object-center w-full h-full" alt="logo">
                   </div>
                   <span class="text-sm tracking-035 leading-[22px]">BCA Transfer</span>
                 </div>
@@ -37,7 +37,7 @@
               <label for="mandiri" class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                   <div class="w-[35px] h-[25px] flex shrink-0 overflow-hidden">
-                    <img src="assets/logos/MANDIRI.svg" class="object-contain object-center w-full h-full" alt="logo">
+                    <img src="{{asset('assets/logos/MANDIRI.svg')}}" class="object-contain object-center w-full h-full" alt="logo">
                   </div>
                   <span class="text-sm tracking-035 leading-[22px]">Mandiri Transfer</span>
                 </div>
