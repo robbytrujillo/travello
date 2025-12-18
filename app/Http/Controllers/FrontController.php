@@ -74,6 +74,11 @@ class FrontController extends Controller
     public function choose_bank(PackageBooking $packageBooking) {
         $user = Auth::user();
 
-        
+        if ($packageBooking->user_id != $user->id) {
+            abort(403);
+        }
+
+        $banks = PackageBank::all();
+        return view('front.choose_bank', compact('packageBooking', 'banks'));
     }
 }
