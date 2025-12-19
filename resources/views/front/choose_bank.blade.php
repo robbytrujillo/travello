@@ -19,31 +19,26 @@
         <div class="px-[35px] w-full flex shrink-0">
           <img src="{{asset('assets/backgrounds/Bank-Account-Illustration.png')}}" class="object-contain" alt="background">
         </div>
-        <form action="payment.html" class="flex flex-col gap-8">
+        <form method="POST" action="{{ route('front.choose_bank_store', $packageBooking) }}" class="flex flex-col gap-8">
+          @csrf
+          @method('PATCH')
           <div class="flex flex-col gap-3">
             <p class="font-semibold">Payment Method</p>
-            <div class="bg-white p-[16px_24px] rounded-[26px]">
-              <label for="bca" class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-[35px] h-[25px] flex shrink-0 overflow-hidden">
-                    <img src="{{asset('assets/logos/BCA.svg')}}" class="object-contain object-center w-full h-full" alt="logo">
+            
+            @foreach ($banks as $bank)
+              <div class="bg-white p-[16px_24px] rounded-[26px]">
+                <label for="bca" class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-[35px] h-[25px] flex shrink-0 overflow-hidden">
+                      <img src="{{ Storage::url($bank->logo) }}" class="object-contain object-center w-full h-full" alt="logo">
+                    </div>
+                    <span class="text-sm tracking-035 leading-[22px]">{{ $bank->bank_name }}</span>
                   </div>
-                  <span class="text-sm tracking-035 leading-[22px]">BCA Transfer</span>
-                </div>
-                <input type="radio" name="payment" id="bca" class="w-5 h-5 appearance-none checked:border-[3px] checked:border-solid checked:border-white rounded-full checked:bg-[#6E5DE7] ring-2 ring-[#6E5DE7]">
-              </label>
-            </div>
-            <div class="bg-white p-[16px_24px] rounded-[26px]">
-              <label for="mandiri" class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-[35px] h-[25px] flex shrink-0 overflow-hidden">
-                    <img src="{{asset('assets/logos/MANDIRI.svg')}}" class="object-contain object-center w-full h-full" alt="logo">
-                  </div>
-                  <span class="text-sm tracking-035 leading-[22px]">Mandiri Transfer</span>
-                </div>
-                <input type="radio" name="payment" id="mandiri" class="w-5 h-5 appearance-none checked:border-[3px] checked:border-solid checked:border-white rounded-full checked:bg-[#6E5DE7] ring-2 ring-[#6E5DE7]">
-              </label>
-            </div>
+                  <input type="radio" name="payment" id="{{ $bank->id }}" class="w-5 h-5 appearance-none checked:border-[3px] checked:border-solid checked:border-white rounded-full checked:bg-[#6E5DE7] ring-2 ring-[#6E5DE7]">
+                </label>
+              </div> 
+            @endforeach
+
           </div>
           <button type="submit" class="p-[16px_24px] rounded-xl bg-blue w-full text-white text-center hover:bg-[#06C755] transition-all duration-300">Checkout</button>
         </form>
