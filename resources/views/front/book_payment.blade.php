@@ -15,7 +15,9 @@
           <p class="m-auto font-semibold text-center">Payment</p>
           <div class="w-12"></div>
         </nav>
-        <form action="success.html" class="flex flex-col gap-8">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('front.book_payment_store', $packageBooking->id) }}" class="flex flex-col gap-8">
+          @csrf
+          @method('PATCH')
           <div class="flex flex-col gap-3 px-4 ">
             <p class="font-semibold">Detail Trip</p>
             <div class="bg-white p-4 rounded-[26px] flex items-center gap-3">
@@ -91,7 +93,7 @@
                   <span id="fileName" class="text-sm text-nowrap">victoria_watson_transfer</span>
                 </div>
               </button>
-              <input type="file" name="file" id="file" class="hidden">
+              <input type="file" name="proof" id="file" class="hidden">
             </div>
             <div class="w-full h-[88px] bg-blue overflow-hidden flex items-center shrink-0 mx-auto rounded-2xl relative">
               <img src="{{asset('assets/backgrounds/reward-left.png')}}" class="object-contain h-full" alt="rewards">
@@ -107,7 +109,7 @@
               <p class="text-white text-sm tracking-035 leading-[22px]">Total Payment</p>
               <p id="grandtotal" class="text-[#EED202] font-semibold text-lg leading-[26px] tracking-[0.6px]">Rp {{ number_format($packageBooking->total_amount, 0, ',', '.') }}</p>
             </div>
-            <button id="confirm-payment" class="p-[16px_24px] rounded-xl bg-blue w-fit disabled:bg-[#BFBFBF] text-white hover:bg-[#06C755] transition-all duration-300" disabled>Confirm</button>
+            <button type="submit" id="confirm-payment" class="p-[16px_24px] rounded-xl bg-blue w-fit disabled:bg-[#BFBFBF] text-white hover:bg-[#06C755] transition-all duration-300" disabled>Confirm</button>
           </div>
         </form>
     </section>
