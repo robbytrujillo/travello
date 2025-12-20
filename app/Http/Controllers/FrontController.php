@@ -98,4 +98,12 @@ class FrontController extends Controller
         });
         return redirect()->route('front.book_payment', $packageBooking->id);
     }
+
+    public function book_payment(PackageBooking $packageBooking) {
+        return view('front.book_payment', compact('packageBooking'));
+    }
+
+    public function book_payment_store(StorePackageBookingRequest $request, PackageBooking $packageBooking) {
+        
+    }
 }
