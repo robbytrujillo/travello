@@ -19,6 +19,15 @@
         <div class="px-[35px] w-full flex shrink-0">
           <img src="{{asset('assets/backgrounds/Bank-Account-Illustration.png')}}" class="object-contain" alt="background">
         </div>
+
+        @if ($errors->any())
+          @foreach ($errors->all() as $error)
+            <div class="py-3 w-full rounded-3xl bg-red-500 text-white">
+              {{ $error }}
+            </div>
+          @endforeach
+        @endif
+
         <form method="POST" action="{{ route('front.choose_bank_store', $packageBooking) }}" class="flex flex-col gap-8">
           @csrf
           @method('PATCH')
@@ -34,7 +43,7 @@
                     </div>
                     <span class="text-sm tracking-035 leading-[22px]">{{ $bank->bank_name }}</span>
                   </div>
-                  <input type="radio" name="payment" id="{{ $bank->id }}" class="w-5 h-5 appearance-none checked:border-[3px] checked:border-solid checked:border-white rounded-full checked:bg-[#6E5DE7] ring-2 ring-[#6E5DE7]">
+                  <input type="radio" value="{{ $bank->id }}" name="package_bank_id" id="{{ $bank->id }}" class="w-5 h-5 appearance-none checked:border-[3px] checked:border-solid checked:border-white rounded-full checked:bg-[#6E5DE7] ring-2 ring-[#6E5DE7]">
                 </label>
               </div> 
             @endforeach
