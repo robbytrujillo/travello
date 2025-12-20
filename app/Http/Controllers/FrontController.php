@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 // use App\Http\Requests\StorePackageTourRequest;
 use App\Http\Requests\StorePackageBookingRequest;
 use App\Http\Requests\UpdatePackageBookingRequest;
+use App\Http\Requests\StorePackageBookingCheckoutRequest;
 
 class FrontController extends Controller
 {
@@ -103,7 +104,15 @@ class FrontController extends Controller
         return view('front.book_payment', compact('packageBooking'));
     }
 
-    public function book_payment_store(StorePackageBookingRequest $request, PackageBooking $packageBooking) {
+    public function book_payment_store(StorePackageBookingCheckoutRequest $request, PackageBooking $packageBooking) {
+        $user = Auth::user();
         
+        if ($packageBooking->user_id != $user->id) {
+            abort(403);
+        }
+
+        DB::transaction( function () use ($request, $user, $packageBooking) {
+            $validated = $request->validated();
+        });
     }
 }
