@@ -40,7 +40,7 @@ class PackageBooking extends Model
     }
     
     public function bank() {
-        return $this->belongsTo(PackageBank::class);
+        return $this->belongsTo(PackageBank::class, 'package_bank_id');
     }
 
 

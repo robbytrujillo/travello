@@ -23,12 +23,14 @@
                 <img src="{{Storage::url($packageBooking->tour->thumbnail)}}" class="object-cover object-center w-full h-full" alt="thumbnail">
               </div>
               <div class="flex flex-col gap-1">
-                <p class="font-semibold text-sm tracking-035 leading-[22px]">Nusa Penida Kelingking Beach</p>
+                <p class="font-semibold text-sm tracking-035 leading-[22px]">{{ $packageBooking->tour->name }}</p>
                 <div class="flex items-center gap-1">
                   <div class="w-4 h-4">
                     <img src="{{asset('assets/icons/calendar-grey.svg')}}" class="w-4 h-4" alt="icon">
                   </div>
-                  <span class="text-darkGrey text-sm tracking-035 leading-[22px]">12 Apr 2024 - 14 Apr 2024</span>
+                  <span class="text-darkGrey text-sm tracking-035 leading-[22px]">
+                    {{ $packageBooking->start_date->format('M d, Y') }} - {{ $packageBooking->end_date->format('M d, Y') }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -40,9 +42,9 @@
                 <p class="text-darkGrey text-sm tracking-035 leading-[22px]">Bank Name</p>
                 <div class="flex items-center gap-2">
                   <div class="w-[35px] h-[25px] flex shrink-0 overflow-hidden">
-                    <img src="{{asset('assets/logos/BCA.svg')}}" class="object-contain object-center w-full h-full" alt="logo">
+                    <img src="{{ Storage::url($packageBooking->bank->logo) }}" class="object-contain object-center w-full h-full" alt="logo">
                   </div>
-                  <span class="text-sm tracking-035 leading-[22px]">Bank Central Asia</span>
+                  <span class="text-sm tracking-035 leading-[22px]">{{ $packageBooking->bank->bank_name }}</span>
                 </div>
               </div>
               <div class="flex flex-col gap-1">
@@ -51,7 +53,7 @@
                   <div class="flex w-6 h-6 overflow-hidden shrink-0">
                     <img src="{{asset('assets/icons/bank.svg')}}" class="object-contain object-center w-full h-full" alt="logo">
                   </div>
-                  <span class="text-sm tracking-035 leading-[22px]">Duo Travel Trip</span>
+                  <span class="text-sm tracking-035 leading-[22px]">{{ $packageBooking->bank->bank_account_name }}</span>
                 </div>
               </div>
               <div class="flex flex-col gap-1">
@@ -60,7 +62,7 @@
                   <div class="flex w-6 h-6 overflow-hidden shrink-0">
                     <img src="{{asset('assets/icons/moneys.svg')}}" class="object-contain object-center w-full h-full" alt="logo">
                   </div>
-                  <span id="bank-number" class="text-sm tracking-035 leading-[22px]" data-value="7342333056">7342333056</span>
+                  <span id="bank-number" class="text-sm tracking-035 leading-[22px]" data-value="{{ $packageBooking->bank->bank_account_number }}">{{ $packageBooking->bank->bank_account_number }}</span>
                   <button type="button" class="font-semibold text-sm tracking-035 leading-[22px] text-blue w-fit ml-auto"  data-copy="bank-number" onclick="copyText(this)">Copy</button>
                 </div>
               </div>
@@ -68,7 +70,7 @@
               <div class="flex flex-col gap-1">
                 <p class="text-darkGrey text-sm tracking-035 leading-[22px]">Total Payment</p>
                 <div class="flex items-center justify-between">
-                  <span id="total-payment" class="font-semibold text-lg tracking-[0.6px] leading-[26px]" data-value="2500000">Rp 2.580.000</span>
+                  <span id="total-payment" class="font-semibold text-lg tracking-[0.6px] leading-[26px]" data-value="2500000">Rp {{ number_format($packageBooking->total_amount, 0, ',', '.') }}</span>
                   <button type="button" class="font-semibold text-sm tracking-035 leading-[22px] text-blue w-fit ml-auto" data-copy="total-payment" onclick="copyText(this)">Copy</button>
                 </div>
               </div>
@@ -103,7 +105,7 @@
           <div class="navigation-bar fixed bottom-0 z-50 max-w-[640px] w-full h-[85px] bg-black rounded-t-[25px] flex items-center justify-between px-6 shadow-[-6px_-8px_20px_0_#00000008]">
             <div class="flex flex-col justify-center gap-1">
               <p class="text-white text-sm tracking-035 leading-[22px]">Total Payment</p>
-              <p id="grandtotal" class="text-[#EED202] font-semibold text-lg leading-[26px] tracking-[0.6px]">Rp 2.580.000</p>
+              <p id="grandtotal" class="text-[#EED202] font-semibold text-lg leading-[26px] tracking-[0.6px]">Rp {{ number_format($packageBooking->total_amount, 0, ',', '.') }}</p>
             </div>
             <button id="confirm-payment" class="p-[16px_24px] rounded-xl bg-blue w-fit disabled:bg-[#BFBFBF] text-white hover:bg-[#06C755] transition-all duration-300" disabled>Confirm</button>
           </div>
