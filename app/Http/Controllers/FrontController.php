@@ -113,6 +113,19 @@ class FrontController extends Controller
 
         DB::transaction( function () use ($request, $user, $packageBooking) {
             $validated = $request->validated();
+
+             if ($request->hasFile('proof')) {
+                $proofPath = $request->file('proof')->store('proofs', 'public');
+                $validated['proof'] = $proofPath;
+            }
+
+            $packageBooking->update($validated);
         });
+
+        return redirect()->route('front.book_finish');
+    }
+
+    public function book_finish() {
+        return view('front.book_finish');
     }
 }
