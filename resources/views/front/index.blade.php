@@ -156,7 +156,7 @@
           
         </div>
         <div class="navigation-bar fixed bottom-0 z-50 max-w-[640px] w-full h-[85px] bg-white rounded-t-[25px] flex items-center justify-evenly py-[45px]">
-          <a href="" class="menu">
+          <a href="{{ route('front.index') }}" class="menu">
             <div class="flex flex-col justify-center gap-1 w-fit">
               <div class="w-4 h-4 flex shrink-0 overflow-hidden mx-auto text-[#4D73FF]">
                 <img src="assets/icons/home.svg" alt="icon">             
@@ -172,7 +172,7 @@
               <p class="font-semibold text-xs leading-[20px] tracking-[0.35px]">Search</p>
             </div>
           </a>
-          <a href="schedule.html" class="opacity-25 menu">
+          <a href="{{ route('dashboard.bookings') }}" class="opacity-25 menu">
             <div class="flex flex-col justify-center gap-1 w-fit">
               <div class="w-4 h-4 flex shrink-0 overflow-hidden mx-auto text-[#4D73FF]">
                 <img src="assets/icons/calendar-blue.svg" alt="icon">              
