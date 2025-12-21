@@ -16,7 +16,7 @@
             <p class="font-semibold text-[24px] leading-[36px] text-white">Transaction Success</p>
             <p class="text-white">Ready to go! don't forget to check<br>your trip on Schedule Page</p>
           </div>
-          <a href="schedule.html" class="p-[16px_24px] rounded-xl bg-white w-full text-center font-semibold text-blue hover:bg-[#06C755] hover:text-white transition-all duration-300">Check Schedule Page</a>
+          <a href="{{ route('dashboard.bookings') }}" class="p-[16px_24px] rounded-xl bg-white w-full text-center font-semibold text-blue hover:bg-[#06C755] hover:text-white transition-all duration-300">Check Schedule Page</a>
         </div>
     </section>
 </body>
