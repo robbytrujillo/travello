@@ -19,7 +19,7 @@
           <p class="font-semibold">My Packages</p>
             
           @forelse(Auth::user()->bookings as $booking)
-            <a href="#" class="card">
+            <a href="{{ route('dashboard.booking.details', $booking->id) }}" class="card">
                 <div class="bg-white p-4 rounded-[26px] flex items-center gap-4">
                     <p class="text-center text-sm leading-[22px] tracking-035">
                         <span class="text-2xl font-semibold">{{ $booking->start_date->format('d') }}</span> 
