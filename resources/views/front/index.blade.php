@@ -38,7 +38,7 @@
           <div class="main-carousel buttons-container">
 
             @forelse ($categories as $category)
-              <a href="category.html" class="px-2 group first-of-type:pl-4 last-of-type:pr-4">
+              <a href="{{ route('front.category', $category->slug) }}" class="px-2 group first-of-type:pl-4 last-of-type:pr-4">
                 <div class="p-3 flex items-center gap-2 rounded-[10px] border border-[#4D73FF] group-hover:bg-[#4D73FF] transition-all duration-300">
                   <div class="flex w-6 h-6 shrink-0">
                     <img src="{{ Storage::url($category->icon) }}" alt="icon">
@@ -48,7 +48,7 @@
               </a>
             @empty
               <p>
-                ...
+                There is no new category data yet
               </p>
             @endforelse
             
